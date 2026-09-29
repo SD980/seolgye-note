@@ -429,6 +429,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 
   // ---------- version history (newest first; add a line here on every update) ----------
   const CHANGELOG = [
+    { v: '2.7', date: '2026-09-30', items: ['Claude 버튼: 공유 창 없이 Claude 앱 새 대화로 바로 열기', '카톡 등 다른 앱으로 보내기는 따로 버튼으로'] },
     { v: '2.6', date: '2026-09-30', items: ['Claude 버튼: 고객과 질문 종류를 골라서 Claude 앱으로 보내기', '보장 분석 · 다음 상담 준비 · 제안 문자 초안 · 쉽게 설명하기 · 이번 주 연락 순서 · 직접 질문', '보낼 내용 미리보기 (전화번호는 보내지 않아요)'] },
     { v: '2.5', date: '2026-09-30', items: ['백업 메뉴 없앰', "예시 고객 지우기를 고객 목록 위로 옮김"] },
     { v: '2.4', date: '2026-09-30', items: ['자동 업데이트: 앱을 열 때 인터넷에서 최신 버전을 받아와요. 이제 APK를 다시 설치할 필요 없어요', '인터넷이 없으면 마지막으로 받은 버전으로 열려요'] },
@@ -789,8 +790,8 @@ ${memos || '- 없음'}
       <div class="lbl">무엇을?<div class="askk">${kinds.map((k) => `<button data-a="askkind" data-v="${k.k}" aria-pressed="${q.kind === k.k}"><b>${k.t}</b><span>${k.d}</span></button>`).join('')}</div></div>
       <label class="lbl">${q.kind === 'free' ? '물어볼 말' : '덧붙일 말 (선택)'}<textarea id="ask-extra" placeholder="${q.kind === 'free' ? '예: 이 고객한테 실손 전환을 권해도 될까?' : '예: 다음 주 화요일에 만나요'}">${esc(q.extra || '')}</textarea></label>
       <details class="askprev"><summary>보낼 내용 미리보기</summary><pre>${esc(prompt)}</pre></details>
-      <p class="sub" style="margin:0;font-size:13px">전화번호는 보내지 않아요. 공유 창에서 Claude를 고르세요.</p>
-      <div class="mfoot" style="margin-top:0"><button class="btn" data-a="close">취소</button><button class="btn primary" data-a="asksend">Claude 앱으로 보내기</button></div>
+      <p class="sub" style="margin:0;font-size:13px">전화번호는 보내지 않아요. Claude 새 대화에 질문이 채워지면 보내기만 누르세요.</p>
+      <div class="mfoot" style="margin-top:0"><button class="btn sm" data-a="askshare" style="margin-right:auto">다른 앱으로 보내기</button><button class="btn" data-a="close">취소</button><button class="btn primary" data-a="asksend">Claude에서 열기</button></div>
     </div></div>`;
   }
 
@@ -1305,6 +1306,13 @@ ${memos || '- 없음'}
     else if (a === 'asksend') {
       S.ask.extra = document.getElementById('ask-extra')?.value || '';
       if (S.ask.kind === 'free' && !S.ask.extra.trim()) { toast('물어볼 말을 적어 주세요'); document.getElementById('ask-extra')?.focus(); return; }
+      const t = askPrompt(); if (!t) return; S.modal = null; renderLayer();
+      const url = 'https://claude.ai/new?q=' + encodeURIComponent(t);
+      if (IS_APP) location.href = url; else window.open(url, '_blank');
+    }
+    else if (a === 'askshare') {
+      S.ask.extra = document.getElementById('ask-extra')?.value || '';
+      if (S.ask.kind === 'free' && !S.ask.extra.trim()) { toast('물어볼 말을 적어 주세요'); return; }
       const t = askPrompt(); if (!t) return; S.modal = null; renderLayer(); shareText(t);
     }
     else if (a === 'open-ai') { if (!S.sample) { toast('Claude 앱에서 열면 쓸 수 있어요'); return; } S.drawer = !S.drawer; render(); document.getElementById('ai-in')?.focus(); }
