@@ -343,6 +343,16 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 .navbtn.verchip { margin-top: auto; height: 44px; font-size: 12px; font-weight: 700; color: var(--lav-ink); flex-direction: column; gap: 2px; }
 .navbtn.verchip .newdot { padding: 1px 6px; border-radius: 8px; background: var(--pink-ink); color: var(--surface); font-size: 10px; }
 @media (max-width: 760px) { .navbtn.verchip { margin-top: 0; } }
+.askk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.askk button { text-align: left; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface); padding: 10px 12px; display: grid; gap: 2px; }
+.askk button b { font-size: 15px; color: var(--ink); }
+.askk button span { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.askk button[aria-pressed="true"] { border-color: var(--lav-ink); background: var(--lav-soft); }
+#ask-extra { width: 100%; min-height: 64px; resize: vertical; border: 1.5px solid var(--line); border-radius: 12px; padding: 10px; background: var(--bg); font: inherit; outline: none; }
+#ask-extra:focus { border-color: var(--lav-ink); }
+.askprev summary { cursor: pointer; font-size: 13px; color: var(--lav-ink); font-weight: 600; }
+.askprev pre { white-space: pre-wrap; font: 12px/1.5 system-ui, sans-serif; background: var(--sunken); border-radius: 10px; padding: 10px; max-height: 180px; overflow: auto; margin: 6px 0 0; }
+@media (max-width: 560px) { .askk { grid-template-columns: 1fr; } }
 .seedbar { display: flex; align-items: center; gap: 8px; margin: 0 12px 8px; padding: 8px 12px; border-radius: 12px; background: var(--sunken); font-size: 13px; color: var(--ink-2); }
 .seedbar button { white-space: nowrap; margin-left: auto; border: none; background: none; color: var(--pink-ink); font-weight: 700; font-size: 13px; padding: 4px 6px; }
 .verbtn { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 20px; border: none; background: color-mix(in srgb, var(--surface) 75%, transparent); color: var(--ink-2); font-weight: 700; font-size: 14px; }
@@ -419,6 +429,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 
   // ---------- version history (newest first; add a line here on every update) ----------
   const CHANGELOG = [
+    { v: '2.6', date: '2026-09-30', items: ['Claude 버튼: 고객과 질문 종류를 골라서 Claude 앱으로 보내기', '보장 분석 · 다음 상담 준비 · 제안 문자 초안 · 쉽게 설명하기 · 이번 주 연락 순서 · 직접 질문', '보낼 내용 미리보기 (전화번호는 보내지 않아요)'] },
     { v: '2.5', date: '2026-09-30', items: ['백업 메뉴 없앰', "예시 고객 지우기를 고객 목록 위로 옮김"] },
     { v: '2.4', date: '2026-09-30', items: ['자동 업데이트: 앱을 열 때 인터넷에서 최신 버전을 받아와요. 이제 APK를 다시 설치할 필요 없어요', '인터넷이 없으면 마지막으로 받은 버전으로 열려요'] },
     { v: '2.3', date: '2026-09-30', items: ['생년월일을 숫자로 바로 입력 (예: 900515 → 1990.05.15), 나이 바로 표시'] },
@@ -713,6 +724,76 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
   // ---------- sample customers ----------
   const SEED_IDS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'];
   const hasSeed = () => S.customers.some((c) => SEED_IDS.includes(c.id));
+  // ---------- Claude 앱에 물어보기 ----------
+  const ASK_ONE = [
+    { k: 'cover', t: '보장 분석', d: '부족한 보장과 우선순위' },
+    { k: 'prep', t: '다음 상담 준비', d: '지난 기록 요약, 할 말, 예상 질문' },
+    { k: 'msg', t: '제안 문자 초안', d: '카톡으로 보낼 안부·제안 메시지' },
+    { k: 'easy', t: '쉽게 설명하기', d: '관심 보장을 고객 눈높이로' },
+    { k: 'free', t: '직접 질문', d: '아래 칸에 물어볼 말을 적어요' }
+  ];
+  const ASK_ALL = [
+    { k: 'week', t: '이번 주 연락 순서', d: '누구부터 연락할지와 이유' },
+    { k: 'status', t: '고객 현황 정리', d: '단계별 요약과 다음 할 일' },
+    { k: 'free', t: '직접 질문', d: '아래 칸에 물어볼 말을 적어요' }
+  ];
+  function custBlock(c) {
+    const a = ageOf(c);
+    const rows = covRows(c).map((r) => `- ${r.item}: 현재 ${r.curTxt} / 목표 ${r.goalTxt} (${r.stTxt})`).join('\n');
+    const memos = (c.memos || []).slice(0, 6).map((m) => `- ${m.date}${m.next ? ' (예정)' : ''}: ${m.text}`).join('\n');
+    return `[고객] ${c.name} / ${a !== '' ? a + '세' : '나이 미입력'} ${c.gender ? c.gender + '성' : ''} / 직업 ${c.job || '미입력'} / 사는 곳 ${c.area || '미입력'} / 진행 상태 ${c.tag}
+[관심 보장] ${(c.interests || []).join(', ') || '없음'}
+[가입 보험] ${(c.policies || []).map((p) => p.kind + (p.year ? '(' + p.year + '년)' : '')).join(', ') || '없음'}
+[보장분석]
+${rows || '- 없음'}
+[상담 기록]
+${memos || '- 없음'}
+[제안 메모] ${c.proposal || '없음'}`;
+  }
+  function allBlock() {
+    return S.customers.slice(0, 60).map((c) => {
+      const a = ageOf(c); const miss = covRows(c).filter((r) => r.s !== 'ok').map((r) => r.item);
+      const next = (c.memos || []).filter((m) => m.next).sort((x, y) => (x.date < y.date ? -1 : 1))[0];
+      const last = (c.memos || []).filter((m) => !m.next).sort((x, y) => (x.date < y.date ? 1 : -1))[0];
+      return `- ${c.name} (${a !== '' ? a + '세' : '나이 모름'}, ${c.tag}) 관심: ${(c.interests || []).join('·') || '없음'} / 부족: ${miss.join('·') || '없음'} / 예정: ${next ? next.date + ' ' + next.text : '없음'} / 최근: ${last ? last.date + ' ' + last.text : '없음'}`;
+    }).join('\n');
+  }
+  function askPrompt() {
+    const q = S.ask; const extra = (q.extra || '').trim();
+    const head = `나는 보험설계사를 막 시작했어. 쉬운 말로, 짧게 정리해 줘. 확실하지 않은 건 추측이라고 표시하고, 특정 상품 가입을 단정해서 권하지는 마. 오늘은 ${iso(today)}이야.`;
+    const more = extra ? `\n\n[덧붙이는 말]\n${extra}` : '';
+    if (q.who === 'all') {
+      const ask = { week: '아래 고객 목록을 보고 이번 주에 누구부터 연락하면 좋을지 순서대로 5명 이내로 골라 줘. 사람마다 이유 한 줄과 연락할 때 첫마디 예시를 붙여 줘.',
+        status: '아래 고객 목록을 가망 / 상담 예정 / 계약 단계별로 요약하고, 단계마다 다음에 할 일을 2~3개씩 정리해 줘.',
+        free: extra || '아래 고객 목록을 보고 내가 신경 써야 할 점을 알려 줘.' }[q.kind];
+      return `${head}\n\n${ask}\n\n[고객 목록]\n${allBlock()}${q.kind === 'free' ? '' : more}`;
+    }
+    const c = S.customers.find((x) => x.id === q.cid); if (!c) return '';
+    const ask = { cover: '아래 고객의 보장분석을 보고 부족한 보장을 우선순위대로 정리해 줘. 항목마다 왜 필요한지 한두 줄로 설명해 줘.',
+      prep: '아래 고객과 다음 상담을 준비하려고 해. 지난 기록을 세 줄로 요약하고, 이번 상담에서 할 말 순서와 고객이 할 만한 질문 3개와 답변 예시를 정리해 줘.',
+      msg: '아래 고객에게 카카오톡으로 보낼 메시지 초안을 2개 써 줘. 부담스럽지 않은 안부로 시작하고, 상담 제안은 자연스럽게. 각각 5줄 이내로.',
+      easy: '아래 고객의 관심 보장을 보험을 잘 모르는 사람도 이해하게 쉽게 설명해 줘. 비유를 하나씩 들어 주고, 고객 상황에 맞춰 말해 줘.',
+      free: extra || '아래 고객에 대해 내가 알아 두면 좋을 점을 알려 줘.' }[q.kind];
+    return `${head}\n\n${ask}\n\n${custBlock(c)}${q.kind === 'free' ? '' : more}`;
+  }
+  function askModal() {
+    const q = S.ask; const c = S.customers.find((x) => x.id === q.cid);
+    const kinds = q.who === 'all' ? ASK_ALL : ASK_ONE;
+    const who = [c ? `<button class="chip" data-a="askwho" data-v="one" aria-pressed="${q.who === 'one'}">${esc(c.name)} 님</button>` : '',
+      `<button class="chip" data-a="askwho" data-v="all" aria-pressed="${q.who === 'all'}">고객 전체 ${S.customers.length}명</button>`].join('');
+    const prompt = askPrompt();
+    return `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="ask-title" style="width:600px">
+      <div class="row-head"><h2 id="ask-title">Claude에게 물어보기</h2><button class="iconbtn" data-a="close" aria-label="닫기">${I.x}</button></div>
+      <p class="sub" style="margin:-6px 0 0;font-size:14px">고른 내용으로 질문을 정리해서 Claude 앱으로 보내요.</p>
+      <div class="lbl">누구에 대해?<div class="chips" style="margin:0">${who}</div>${c ? '' : '<span class="sub" style="font-weight:500">한 사람만 물어보려면 고객 목록에서 먼저 고르세요</span>'}</div>
+      <div class="lbl">무엇을?<div class="askk">${kinds.map((k) => `<button data-a="askkind" data-v="${k.k}" aria-pressed="${q.kind === k.k}"><b>${k.t}</b><span>${k.d}</span></button>`).join('')}</div></div>
+      <label class="lbl">${q.kind === 'free' ? '물어볼 말' : '덧붙일 말 (선택)'}<textarea id="ask-extra" placeholder="${q.kind === 'free' ? '예: 이 고객한테 실손 전환을 권해도 될까?' : '예: 다음 주 화요일에 만나요'}">${esc(q.extra || '')}</textarea></label>
+      <details class="askprev"><summary>보낼 내용 미리보기</summary><pre>${esc(prompt)}</pre></details>
+      <p class="sub" style="margin:0;font-size:13px">전화번호는 보내지 않아요. 공유 창에서 Claude를 고르세요.</p>
+      <div class="mfoot" style="margin-top:0"><button class="btn" data-a="close">취소</button><button class="btn primary" data-a="asksend">Claude 앱으로 보내기</button></div>
+    </div></div>`;
+  }
+
   function renderLayer() {
     let h = '';
     if (S.modal === 'form') h += formModal();
@@ -730,6 +811,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
         <div class="mfoot"><button class="btn primary" data-a="closecl">확인</button></div>
       </div></div>`;
     }
+    if (S.modal === 'askc') h += askModal();
     if (S.cam) h += camView();
     if (S.drawer) h += drawerView();
     if (S.toast) h += `<div class="toast" role="status">${esc(S.toast)}</div>`;
@@ -1214,7 +1296,17 @@ ${memos || '- 없음'}
     else if (a === 'askdel') { S.modal = 'del'; renderLayer(); }
     else if (a === 'dodel') { const c = sel(); (c.docs || []).forEach((d) => (d.type === 'bundle' ? d.pages : [d.blob]).forEach((id) => delBlob(id))); S.customers = S.customers.filter((x) => x.id !== c.id); S.selId = S.customers[0]?.id || null; save(); S.modal = null; render(); toast(c.name + ' 님을 삭제했어요'); }
     else if (a === 'saveprop') { const c = sel(); c.proposal = document.getElementById('proposal').value.trim(); save(); toast('제안 메모를 저장했어요'); }
-    else if (a === 'open-ai' && IS_APP) { shareCustomer(); }
+    else if (a === 'open-ai' && IS_APP) {
+      if (S.view === 'study') { shareCustomer(); return; }
+      const c = sel(); S.ask = { who: c ? 'one' : 'all', cid: c ? c.id : null, kind: c ? 'cover' : 'week', extra: '' }; S.modal = 'askc'; renderLayer();
+    }
+    else if (a === 'askwho') { S.ask.extra = document.getElementById('ask-extra')?.value || ''; S.ask.who = v; S.ask.kind = v === 'all' ? 'week' : 'cover'; renderLayer(); }
+    else if (a === 'askkind') { S.ask.extra = document.getElementById('ask-extra')?.value || ''; S.ask.kind = v; renderLayer(); if (v === 'free') document.getElementById('ask-extra')?.focus(); }
+    else if (a === 'asksend') {
+      S.ask.extra = document.getElementById('ask-extra')?.value || '';
+      if (S.ask.kind === 'free' && !S.ask.extra.trim()) { toast('물어볼 말을 적어 주세요'); document.getElementById('ask-extra')?.focus(); return; }
+      const t = askPrompt(); if (!t) return; S.modal = null; renderLayer(); shareText(t);
+    }
     else if (a === 'open-ai') { if (!S.sample) { toast('Claude 앱에서 열면 쓸 수 있어요'); return; } S.drawer = !S.drawer; render(); document.getElementById('ai-in')?.focus(); }
     else if (a === 'close-ai') { S.drawer = false; render(); }
     else if (a === 'clear-ai') { S.chat = []; renderLayer(); }
@@ -1280,6 +1372,7 @@ ${memos || '- 없음'}
   });
   document.addEventListener('change', (ev) => { if (ev.target.id === 'exam') { S.st.exam = ev.target.value; saveSt(); render(); } });
   document.addEventListener('input', (ev) => {
+    if (ev.target.id === 'ask-extra' && S.ask) { S.ask.extra = ev.target.value; const pre = document.querySelector('.askprev pre'); if (pre) pre.textContent = askPrompt(); return; }
     if (ev.target.id === 'f-birth') {
       const el = ev.target; const d = el.value.replace(/\D/g, '').slice(0, 8);
       let out = d;
