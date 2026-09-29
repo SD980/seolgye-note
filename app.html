@@ -429,6 +429,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 
   // ---------- version history (newest first; add a line here on every update) ----------
   const CHANGELOG = [
+    { v: '2.8', date: '2026-09-30', items: ['새 버전을 올리면 1분 안에 반영 (예전엔 최대 5분)', '업데이트 내역 창에 "지금 업데이트 확인" 버튼'] },
     { v: '2.7', date: '2026-09-30', items: ['Claude 버튼: 공유 창 없이 Claude 앱 새 대화로 바로 열기', '카톡 등 다른 앱으로 보내기는 따로 버튼으로'] },
     { v: '2.6', date: '2026-09-30', items: ['Claude 버튼: 고객과 질문 종류를 골라서 Claude 앱으로 보내기', '보장 분석 · 다음 상담 준비 · 제안 문자 초안 · 쉽게 설명하기 · 이번 주 연락 순서 · 직접 질문', '보낼 내용 미리보기 (전화번호는 보내지 않아요)'] },
     { v: '2.5', date: '2026-09-30', items: ['백업 메뉴 없앰', "예시 고객 지우기를 고객 목록 위로 옮김"] },
@@ -795,6 +796,24 @@ ${memos || '- 없음'}
     </div></div>`;
   }
 
+  // ---------- 최신 버전 바로 확인 (GitHub 캐시 우회) ----------
+  const GH = 'SD980/seolgye-note';
+  async function checkFresh() {
+    try {
+      const r = await fetch('https://api.github.com/repos/' + GH + '/commits/main', { cache: 'no-store' });
+      if (!r.ok) return null;
+      const sha = (await r.json()).sha; if (!sha) return null;
+      const t = await (await fetch('https://raw.githubusercontent.com/' + GH + '/' + sha + '/app.html')).text();
+      if (t.indexOf('seolgye-app') < 0) return null;
+      const m = t.match(/v: '([\d.]+)'/);
+      return m && m[1] !== CUR ? { v: m[1], t } : null;
+    } catch (e) { return null; }
+  }
+  function applyFresh(u) {
+    try { localStorage.setItem('seolgye-remote-html', u.t); } catch (e) {}
+    document.open(); document.write(u.t); document.close();
+  }
+
   function renderLayer() {
     let h = '';
     if (S.modal === 'form') h += formModal();
@@ -809,7 +828,7 @@ ${memos || '- 없음'}
         <div class="row-head"><h2 id="cl-title">업데이트 내역</h2><button class="iconbtn" data-a="closecl" aria-label="닫기">${I.x}</button></div>
         <div class="vflow">${from ? `<span class="old">v${esc(from)}</span><span class="arrow">→</span>` : ''}<span>v${CUR}</span><span class="sub" style="font-weight:600;margin-left:auto">${from ? '새 버전으로 업데이트됐어요' : '지금 쓰는 버전'}</span></div>
         <div class="vlist">${CHANGELOG.map((c) => `<div class="vitem ${c.v === CUR ? 'cur' : ''}"><div class="vh2"><b>v${esc(c.v)}</b><span class="sub num">${fmtD(c.date)} 업데이트</span>${c.v === CUR ? '<span class="tag 상담예정">현재</span>' : ''}</div><ul>${c.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
-        <div class="mfoot"><button class="btn primary" data-a="closecl">확인</button></div>
+        <div class="mfoot">${IS_APP ? `<button class="btn" data-a="checkupd" style="margin-right:auto">${S.checking ? '확인 중…' : '지금 업데이트 확인'}</button>` : ''}<button class="btn primary" data-a="closecl">확인</button></div>
       </div></div>`;
     }
     if (S.modal === 'askc') h += askModal();
@@ -1327,6 +1346,10 @@ ${memos || '- 없음'}
       save(); render(); toast('예시 고객 ' + (n - S.customers.length) + '명을 지웠어요');
     }
     else if (a === 'changelog') { S.fromV = seenV; S.modal = 'changelog'; renderLayer(); }
+    else if (a === 'checkupd') {
+      if (S.checking) return; S.checking = true; renderLayer();
+      checkFresh().then((u) => { S.checking = false; if (u) { seenV = CUR; try { localStorage.setItem(VKEY, CUR); } catch (e) {} applyFresh(u); } else { renderLayer(); toast('지금 최신 버전(v' + CUR + ')이에요'); } });
+    }
     else if (a === 'closecl') { seenV = CUR; try { localStorage.setItem(VKEY, CUR); } catch (e) {} S.modal = null; render(); }
     else if (a === 'present') { S.present = !S.present; render(); }
     else if (a === 'camopen') { S.cam = { shots: [], step: 'shoot', kind: '', co: '' }; renderLayer(); }
@@ -1397,8 +1420,12 @@ ${memos || '- 없음'}
   });
 
   if (!seenV) { let had = false; try { had = !!localStorage.getItem('seolgye-note-v1'); } catch (e) {} seenV = had ? '1.4' : CUR; try { localStorage.setItem(VKEY, seenV); } catch (e) {} }
+  const startAuth = (ms) => { if (IS_APP) setTimeout(() => { try { window.Android.authenticate(); } catch (e) {} }, ms); };
   render();
-  if (IS_APP) setTimeout(() => { try { window.Android.authenticate(); } catch (e) {} }, 400);
+  if (IS_APP && !window.__freshChecked) {
+    window.__freshChecked = true;
+    Promise.race([checkFresh(), new Promise((r) => setTimeout(() => r(null), 2500))]).then((u) => { if (u) applyFresh(u); else startAuth(0); });
+  } else startAuth(400);
 })();
 </script>
 </body></html>
