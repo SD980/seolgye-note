@@ -429,6 +429,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 
   // ---------- version history (newest first; add a line here on every update) ----------
   const CHANGELOG = [
+    { v: '2.9', date: '2026-09-30', items: ['"지금 업데이트 확인" 버튼을 업데이트 내역 창 맨 위로', '최근 3개만 보이고 나머지는 "이전 내역 더보기"'] },
     { v: '2.8', date: '2026-09-30', items: ['새 버전을 올리면 1분 안에 반영 (예전엔 최대 5분)', '업데이트 내역 창에 "지금 업데이트 확인" 버튼'] },
     { v: '2.7', date: '2026-09-30', items: ['Claude 버튼: 공유 창 없이 Claude 앱 새 대화로 바로 열기', '카톡 등 다른 앱으로 보내기는 따로 버튼으로'] },
     { v: '2.6', date: '2026-09-30', items: ['Claude 버튼: 고객과 질문 종류를 골라서 Claude 앱으로 보내기', '보장 분석 · 다음 상담 준비 · 제안 문자 초안 · 쉽게 설명하기 · 이번 주 연락 순서 · 직접 질문', '보낼 내용 미리보기 (전화번호는 보내지 않아요)'] },
@@ -827,8 +828,10 @@ ${memos || '- 없음'}
       h += `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="cl-title" style="width:520px">
         <div class="row-head"><h2 id="cl-title">업데이트 내역</h2><button class="iconbtn" data-a="closecl" aria-label="닫기">${I.x}</button></div>
         <div class="vflow">${from ? `<span class="old">v${esc(from)}</span><span class="arrow">→</span>` : ''}<span>v${CUR}</span><span class="sub" style="font-weight:600;margin-left:auto">${from ? '새 버전으로 업데이트됐어요' : '지금 쓰는 버전'}</span></div>
-        <div class="vlist">${CHANGELOG.map((c) => `<div class="vitem ${c.v === CUR ? 'cur' : ''}"><div class="vh2"><b>v${esc(c.v)}</b><span class="sub num">${fmtD(c.date)} 업데이트</span>${c.v === CUR ? '<span class="tag 상담예정">현재</span>' : ''}</div><ul>${c.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
-        <div class="mfoot">${IS_APP ? `<button class="btn" data-a="checkupd" style="margin-right:auto">${S.checking ? '확인 중…' : '지금 업데이트 확인'}</button>` : ''}<button class="btn primary" data-a="closecl">확인</button></div>
+        ${IS_APP ? `<button class="btn" data-a="checkupd" style="width:100%;flex:none">${S.checking ? '확인 중…' : '지금 업데이트 확인'}</button>` : ''}
+        <div class="vlist">${(S.clAll ? CHANGELOG : CHANGELOG.slice(0, 3)).map((c) => `<div class="vitem ${c.v === CUR ? 'cur' : ''}"><div class="vh2"><b>v${esc(c.v)}</b><span class="sub num">${fmtD(c.date)} 업데이트</span>${c.v === CUR ? '<span class="tag 상담예정">현재</span>' : ''}</div><ul>${c.items.map((t) => `<li>${esc(t)}</li>`).join('')}</ul></div>`).join('')}</div>
+        ${!S.clAll && CHANGELOG.length > 3 ? `<button class="btn sm" data-a="clall" style="align-self:center;flex:none">이전 내역 더보기 (${CHANGELOG.length - 3}개)</button>` : ''}
+        <div class="mfoot"><button class="btn primary" data-a="closecl">확인</button></div>
       </div></div>`;
     }
     if (S.modal === 'askc') h += askModal();
@@ -1345,7 +1348,8 @@ ${memos || '- 없음'}
       const n = S.customers.length; S.customers = S.customers.filter((c) => !SEED_IDS.includes(c.id)); S.selId = S.customers[0]?.id || null;
       save(); render(); toast('예시 고객 ' + (n - S.customers.length) + '명을 지웠어요');
     }
-    else if (a === 'changelog') { S.fromV = seenV; S.modal = 'changelog'; renderLayer(); }
+    else if (a === 'changelog') { S.clAll = false; S.fromV = seenV; S.modal = 'changelog'; renderLayer(); }
+    else if (a === 'clall') { S.clAll = true; renderLayer(); }
     else if (a === 'checkupd') {
       if (S.checking) return; S.checking = true; renderLayer();
       checkFresh().then((u) => { S.checking = false; if (u) { seenV = CUR; try { localStorage.setItem(VKEY, CUR); } catch (e) {} applyFresh(u); } else { renderLayer(); toast('지금 최신 버전(v' + CUR + ')이에요'); } });
