@@ -392,6 +392,94 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
   .askfab { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); right: 16px; }
   .search { width: 100%; }
 }
+/* ===== v4 design ===== */
+body { letter-spacing: -.01em; }
+.card { box-shadow: 0 1px 2px rgba(46, 42, 71, .04), 0 8px 24px rgba(46, 42, 71, .04); }
+.dd { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 999px; white-space: nowrap; background: var(--sunken); color: var(--ink-2); flex-shrink: 0; }
+.dd svg { width: 14px; height: 14px; }
+.dd.pink { background: var(--pink-soft); color: var(--pink-ink); }
+.dd.butter { background: var(--butter-soft); color: var(--butter-ink); }
+.dd.lav { background: var(--lav-soft); color: var(--lav-ink); }
+.dd.lav.strong { background: var(--lav); color: #2E2A47; }
+.dd.mint { background: var(--mint-soft); color: var(--mint-ink); }
+.iconbtn.sm { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; }
+.iconbtn.sm svg { width: 18px; height: 18px; }
+a.btn, a.iconbtn { text-decoration: none; color: inherit; }
+.btn.call { background: var(--mint-soft); border-color: transparent; color: var(--mint-ink); }
+.main.fit .dhead .btn.call { width: auto; padding: 0 16px; }
+.main.fit .dhead .btn.call .lbltxt { display: inline; }
+.dhead .meta { font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+.seg { display: inline-flex; background: var(--sunken); border-radius: 12px; padding: 3px; gap: 2px; margin-top: 8px; }
+.seg button { border: none; background: none; border-radius: 9px; padding: 5px 12px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(46, 42, 71, .12); }
+.main.fit .info { grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); }
+.info dd { white-space: normal; word-break: keep-all; overflow-wrap: anywhere; line-height: 1.35; }
+.polb { width: 100%; border: none; text-align: left; font: inherit; color: inherit; }
+.polb:hover, .cvb:hover { background: var(--lav-soft); }
+.cvb { width: 100%; background: none; border: none; border-bottom: 1px solid var(--line); text-align: left; font: inherit; color: inherit; border-radius: 0; }
+.avatar.sm { width: 38px; height: 38px; border-radius: 19px; font-size: 15px; }
+/* home */
+.home-head h1 { font-size: 28px; }
+.hdate { font-size: 14px; color: var(--lav-ink); font-weight: 700; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+.kpi { text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: 18px; padding: 14px 16px; display: grid; gap: 2px; box-shadow: 0 1px 2px rgba(46, 42, 71, .04); position: relative; overflow: hidden; }
+.kpi::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--line); }
+.kpi.pink::before { background: var(--pink-ink); } .kpi.lav::before { background: var(--lav); } .kpi.mint::before { background: var(--mint); } .kpi.ink::before { background: var(--ink); }
+.kpi span { font-size: 13px; color: var(--muted); font-weight: 600; }
+.kpi b { font-size: 30px; font-weight: 800; line-height: 1.1; }
+.kpi b small, .mstats b small { font-size: 14px; font-weight: 700; color: var(--muted); margin-left: 2px; }
+.hgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.hcard { display: flex; flex-direction: column; gap: 4px; }
+.hh { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+.hh h2 { font-size: 17px; }
+.hh .sub { margin-left: auto; font-size: 12.5px; }
+.hi { width: 34px; height: 34px; border-radius: 11px; display: flex; align-items: center; justify-content: center; }
+.hi.lav { background: var(--lav-soft); color: var(--lav-ink); } .hi.butter { background: var(--butter-soft); color: var(--butter-ink); } .hi.pink { background: var(--pink-soft); color: var(--pink-ink); } .hi.mint { background: var(--mint-soft); color: var(--mint-ink); }
+.hrow { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-top: 1px solid var(--line); }
+.hrow:first-of-type { border-top: none; }
+.hmain { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; border: none; background: none; text-align: left; padding: 0; }
+.hmain .who { min-width: 0; display: grid; }
+.hmain .who b { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hmain .who span { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hempty { margin: 4px 0; padding: 14px; border-radius: 14px; background: var(--bg); color: var(--muted); font-size: 13.5px; }
+.mstats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.mstats div { background: var(--bg); border-radius: 14px; padding: 10px 12px; display: grid; }
+.mstats span { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+.mstats b { font-size: 22px; font-weight: 800; }
+.sgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; margin-top: 12px; }
+.sgrid h3 { font-size: 13px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+.frow2 { display: grid; grid-template-columns: 64px minmax(0, 1fr) 40px; gap: 8px; align-items: center; margin: 7px 0; font-size: 13px; font-weight: 600; }
+.frow2 em { font-style: normal; text-align: right; color: var(--ink-2); }
+.fbar { height: 12px; background: var(--sunken); border-radius: 6px; overflow: hidden; }
+.fbar b { display: block; height: 100%; border-radius: 6px; }
+.fbar b.pink { background: var(--pink-ink); opacity: .75; } .fbar b.lav { background: var(--lav); } .fbar b.mint { background: var(--mint); }
+.mchart { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; height: 130px; align-items: end; }
+.mcol { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; }
+.mcol .bars { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 3px; border-bottom: 1px solid var(--line); }
+.mcol .bars i { width: 38%; max-width: 16px; min-height: 2px; border-radius: 4px 4px 0 0; position: relative; }
+.mcol .bars em { position: absolute; top: -17px; left: 50%; transform: translateX(-50%); font-style: normal; font-size: 11px; font-weight: 700; color: var(--ink-2); }
+.b1 { background: var(--lav); } .b2 { background: var(--mint); }
+.mcol span { font-size: 11.5px; color: var(--muted); font-weight: 600; }
+.mcol.cur span { color: var(--lav-ink); font-weight: 800; }
+.legend { display: flex; gap: 14px; justify-content: flex-end; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+@media (max-width: 1000px) { .hgrid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 760px) {
+  .navbtn { width: auto; flex: 1; min-width: 0; font-size: 11px; white-space: nowrap; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .kpi b { font-size: 26px; }
+  .mstats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sgrid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .main.fit .dhead { flex-wrap: wrap; }
+  .main.fit .dhead .who { flex: 1 1 calc(100% - 70px); }
+  .main.fit .dhead .nm { white-space: normal; }
+  .dhead .acts { width: 100%; }
+  .dhead .acts .btn.call { flex: 1; }
+  .main.fit .info { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-head h1 { font-size: 24px; }
+}
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
@@ -402,7 +490,16 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 <script>
 (() => {
   // ---------- icons ----------
+  const svgI = (d, z = 22) => `<svg width="${z}" height="${z}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
   const I = {
+    home: svgI('<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>'),
+    phone: svgI('<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>', 20),
+    msg: svgI('<path d="M4 5h16v11H9l-5 4z"/>', 20),
+    gift: svgI('<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v9H5v-9"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>', 20),
+    cal: svgI('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', 20),
+    chart: svgI('<path d="M4 20V11M10 20V5M16 20v-6M21 20H3"/>', 20),
+    check: svgI('<path d="M5 12l5 5L20 7"/>', 18),
+    renew: svgI('<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>', 20),
     bak: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7.5v9c0 1.9-3.6 3.5-8 3.5s-8-1.6-8-3.5v-9"/><ellipse cx="12" cy="7.5" rx="8" ry="3.5"/><path d="M4 12c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5"/></svg>',
     users: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.2c2.1.6 3.5 2.6 3.5 5.8"/></svg>',
     out: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 16l-4-4 4-4"/><path d="M6 12h10"/></svg>',
@@ -429,6 +526,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
 
   // ---------- version history (newest first; add a line here on every update) ----------
   const CHANGELOG = [
+    { v: '4.0', date: '2026-10-01', items: ['오늘 홈 화면: 약속, 연락해 볼 사람, 생일·갱신, 이번 달 실적을 한눈에', '고객 화면에서 전화·문자 바로 걸기, 진행 상태 한 번에 바꾸기', '가입 보험 추가·수정 (보험료, 갱신·만기일), 보장분석 금액 직접 고치기', '생일·갱신 알림, 최근 6개월 상담·계약 그래프', '폰 화면 정리: 정보칸 글자 잘림, 전화번호 하이픈, 필터와 상세 맞추기'] },
     { v: '3.0', date: '2026-09-30', items: ['뒤로가기를 실수로 눌러도 바로 꺼지지 않게: 한 번 더 누르면 종료'] },
     { v: '2.9', date: '2026-09-30', items: ['"지금 업데이트 확인" 버튼을 업데이트 내역 창 맨 위로', '최근 3개만 보이고 나머지는 "이전 내역 더보기"'] },
     { v: '2.8', date: '2026-09-30', items: ['새 버전을 올리면 1분 안에 반영 (예전엔 최대 5분)', '업데이트 내역 창에 "지금 업데이트 확인" 버튼'] },
@@ -460,6 +558,18 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
   const fmt = (s) => { if (!s) return ''; const d = new Date(s + 'T00:00:00'); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 (' + '일월화수목금토'[d.getDay()] + ')'; };
   const ageOf = (c) => { if (c.birth) { const b = new Date(c.birth + 'T00:00:00'); let a = today.getFullYear() - b.getFullYear(); if (today < new Date(today.getFullYear(), b.getMonth(), b.getDate())) a--; return a; } return c.age ?? ''; };
   const won = (n) => (n >= 10000 ? (n / 10000) + '억' : n ? n.toLocaleString() + '만' : '없음');
+  const fmtPhone = (p) => { const d = String(p || '').replace(/\D/g, ''); if (/\*/.test(p || '')) return p; if (d.length === 11) return d.slice(0, 3) + '-' + d.slice(3, 7) + '-' + d.slice(7); if (d.length === 10) return d.startsWith('02') ? d.slice(0, 2) + '-' + d.slice(2, 6) + '-' + d.slice(6) : d.slice(0, 3) + '-' + d.slice(3, 6) + '-' + d.slice(6); if (d.length === 9 && d.startsWith('02')) return '02-' + d.slice(2, 5) + '-' + d.slice(5); return p || ''; };
+  const telOf = (p) => String(p || '').replace(/[^\d+]/g, '');
+  const canCall = (c) => !!(c && c.phone && !/\*/.test(c.phone) && telOf(c.phone).length >= 9);
+  const dayDiff = (s) => Math.round((new Date(s + 'T00:00:00') - today) / 86400000);
+  const ddTxt = (n) => (n === 0 ? '오늘' : n === 1 ? '내일' : n > 0 ? n + '일 후' : -n + '일 지남');
+  const wonTxt = (n) => (!n ? '' : n >= 10000 ? (Math.round(n / 1000) / 10).toString() + '만원' : Number(n).toLocaleString() + '원');
+  const nextBday = (c) => { if (!c.birth) return null; const b = new Date(c.birth + 'T00:00:00'); let d = new Date(today.getFullYear(), b.getMonth(), b.getDate()); if (d < today) d = new Date(today.getFullYear() + 1, b.getMonth(), b.getDate()); return { date: iso(d), days: Math.round((d - today) / 86400000), age: d.getFullYear() - b.getFullYear() }; };
+  const lastContact = (c) => (c.memos || []).filter((m) => !m.next && m.date <= iso(today)).map((m) => m.date).sort().pop() || null;
+  const createdOf = (c) => { if (c.createdAt) return c.createdAt; const m = /^c([0-9a-z]+)[0-9a-z]{4}$/.exec(c.id || ''); if (m) { const t = parseInt(m[1], 36); if (t > 1.6e12 && t < 4e12) return iso(new Date(t)); } return null; };
+  const jong = (w) => { const c = String(w).trim().slice(-1).charCodeAt(0) - 0xAC00; return c >= 0 && c <= 11171 ? c % 28 : 0; };
+  const eul = (w) => w + (jong(w) ? '을' : '를');
+  const ro = (w) => w + (jong(w) && jong(w) !== 8 ? '으로' : '로');
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 
   // ---------- sample data (examples, not real customers) ----------
@@ -505,6 +615,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
     drawer: false, chat: [], busy: false, status: '', ctl: null,
     sample: null, sampleTools: false
   };
+  S.customers.forEach((c) => (c.policies || []).forEach((p) => { if (!p.id) p.id = 'p' + uid(); }));
   S.selId = S.customers[0]?.id || null;
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify({ customers: S.customers })); } catch (e) {} };
   const sel = () => S.customers.find((c) => c.id === S.selId) || null;
@@ -527,13 +638,14 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
     const nav = `
       <nav class="rail" aria-label="주 메뉴">
         <div class="logo">설계</div>
-        <button class="navbtn" data-a="go" data-v="customers" ${S.view !== 'study' ? 'aria-current="page"' : ''}>${I.users}고객</button>
+        <button class="navbtn" data-a="go" data-v="home" ${S.view === 'home' ? 'aria-current="page"' : ''}>${I.home}홈</button>
+        <button class="navbtn" data-a="go" data-v="customers" ${S.view === 'customers' || S.view === 'coverage' ? 'aria-current="page"' : ''}>${I.users}고객</button>
         <button class="navbtn" data-a="go" data-v="study" ${S.view === 'study' ? 'aria-current="page"' : ''}>${I.book}공부</button>
         <button class="navbtn ai" data-a="open-ai" aria-expanded="${S.drawer}"><span class="dot"></span>Claude</button>
         <button class="navbtn verchip" data-a="changelog" aria-label="업데이트 내역 보기">v${CUR}${seenV && seenV !== CUR ? '<span class="newdot">NEW</span>' : ''}</button>
         <button class="navbtn logout" data-a="logout" aria-label="로그아웃" style="margin-top:0">${I.out}로그아웃</button>
       </nav>`;
-    app.innerHTML = nav + `<main class="main ${S.view === 'customers' ? 'fit' : S.view === 'coverage' ? 'fitc' : ''}" id="main">${S.view === 'coverage' ? coverageView() : S.view === 'study' ? studyView() : customersView()}</main>`;
+    app.innerHTML = nav + `<main class="main ${S.view === 'customers' ? 'fit' : S.view === 'coverage' ? 'fitc' : ''}" id="main">${S.view === 'coverage' ? coverageView() : S.view === 'study' ? studyView() : S.view === 'home' ? homeView() : customersView()}</main>`;
     renderLayer();
   }
 
@@ -555,8 +667,11 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
     </div></div>`;
   }
 
+  const listFiltered = () => S.customers.filter((c) => (S.filter === '전체' || c.tag === S.filter) && (!S.q.trim() || (c.name + (c.phone || '') + telOf(c.phone) + (c.area || '')).includes(S.q.trim())));
   function customersView() {
-    const c = sel();
+    const vis = listFiltered();
+    if (vis.length && !vis.some((x) => x.id === S.selId)) S.selId = vis[0].id;
+    const c = vis.length ? sel() : null;
     const filters = ['전체', '상담 예정', '가망', '계약'].map((f) => `<button class="chip" data-a="filter" data-v="${f}" aria-pressed="${S.filter === f}">${f === '전체' ? '전체 ' + S.customers.length : f}</button>`).join('');
     return `
       <div class="page-head">
@@ -566,25 +681,27 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
       </div>
       <div class="cgrid">
         <section class="card clist" aria-label="고객 목록"><div class="filters">${filters}</div>${hasSeed() ? `<div class="seedbar">예시 고객이에요<button data-a="delseed">예시 모두 지우기</button></div>` : ''}<div id="rows">${rowsHtml()}</div></section>
-        ${c ? detailView(c) : '<section class="card"><p class="empty-note">왼쪽에서 고객을 골라 주세요.</p></section>'}
+        ${c ? detailView(c) : `<section class="card"><p class="empty-note">${S.customers.length ? '이 조건에 맞는 고객이 없어요.' : '아직 고객이 없어요. 새 고객을 등록해 보세요.'}</p></section>`}
       </div>`;
   }
 
   function rowsHtml() {
-    const list = S.customers.filter((c) => (S.filter === '전체' || c.tag === S.filter) && (!S.q.trim() || (c.name + c.phone + (c.area || '')).includes(S.q.trim())));
-    return list.map((x) => `
+    const list = listFiltered();
+    return list.map((x) => { const bd = nextBday(x); return `
       <button class="crow" data-a="pick" data-v="${x.id}" aria-current="${x.id === S.selId}">
         <span class="avatar">${esc(x.name[0])}</span>
-        <span class="who"><span class="nm">${esc(x.name)}</span><br><span class="mt num">${esc(ageOf(x) !== '' ? ageOf(x) + '세' : '나이 미입력')} · ${esc(x.phone || '번호 없음')}</span></span>
-        <span class="tag ${x.tag.replace(' ', '')}">${esc(x.tag)}</span>
-      </button>`).join('') || `<p class="empty-note" style="padding:16px">${S.customers.length ? '찾는 고객이 없어요' : '아직 고객이 없어요. 새 고객을 등록해 보세요.'}</p>`;
+        <span class="who"><span class="nm">${esc(x.name)}</span><br><span class="mt num">${esc(ageOf(x) !== '' ? ageOf(x) + '세' : '나이 미입력')} · ${esc(fmtPhone(x.phone) || '번호 없음')}</span></span>
+        ${bd && bd.days <= 7 ? `<span class="dd pink">생일 ${bd.days ? 'D-' + bd.days : '오늘'}</span>` : ''}<span class="tag ${x.tag.replace(' ', '')}">${esc(x.tag)}</span>
+      </button>`; }).join('') || `<p class="empty-note" style="padding:16px">${S.customers.length ? '찾는 고객이 없어요' : '아직 고객이 없어요. 새 고객을 등록해 보세요.'}</p>`;
   }
 
   function detailView(c) {
     const a = ageOf(c);
-    const info = [['생년월일', c.birth ? c.birth.replace(/-/g, '.') : (a !== '' ? a + '세' : '')], ['전화번호', c.phone], ['직업', c.job], ['사는 곳', c.area], ['알게 된 경로', c.source]]
+    const bd = nextBday(c);
+    const info = [['생년월일', c.birth ? c.birth.replace(/-/g, '.') : (a !== '' ? a + '세' : '')], ['전화번호', fmtPhone(c.phone)], ['직업', c.job], ['사는 곳', c.area], ['알게 된 경로', c.source]]
       .map(([k, v]) => `<div><dt>${k}</dt><dd class="${v ? '' : 'empty'}">${esc(v || '미입력')}</dd></div>`).join('');
-    const pols = (c.policies || []).map((p) => `<div class="pol"><div class="k"><b>${esc(p.kind)}</b><span>${esc(p.company || '')}${p.year ? ' · ' + p.year + '년 가입' : ''}</span></div></div>`).join('') || '<p class="empty-note">가입한 보험이 아직 없어요</p>';
+    const prem = (c.policies || []).reduce((t, p) => t + (Number(p.premium) || 0), 0);
+    const pols = (c.policies || []).map((p) => { const rn = p.renew ? dayDiff(p.renew) : null; return `<button class="pol polb" data-a="editpol" data-v="${p.id}"><div class="k"><b>${esc(p.kind)}</b><span>${esc([p.company, p.year ? p.year + '년 가입' : '', wonTxt(p.premium) ? '월 ' + wonTxt(p.premium) : ''].filter(Boolean).join(' · '))}</span></div>${rn !== null ? `<span class="dd ${rn < 0 ? 'pink' : rn <= 60 ? 'butter' : 'soft'}">${rn < 0 ? '갱신 ' + -rn + '일 지남' : '갱신 D-' + rn}</span>` : ''}</button>`; }).join('') || '<p class="empty-note">가입한 보험이 아직 없어요. 증권을 보고 추가해 보세요.</p>';
     const none = covRows(c).filter((r) => r.s === 'none').map((r) => r.item);
     const memos = [...(c.memos || [])].sort((x, y) => (y.date || '').localeCompare(x.date || '')).map((m) => `
       <div class="memo ${m.next ? 'next' : ''}"><i></i><div><div class="d">${esc(fmt(m.date))}${m.next ? ' · 예정' : ''}</div><div>${esc(m.text)}</div></div></div>`).join('') || '<p class="empty-note">아직 상담 기록이 없어요</p>';
@@ -594,10 +711,12 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
           <div class="dhead">
             <span class="avatar lg">${esc(c.name[0])}</span>
             <div class="who"><div class="nm">${esc(c.name)} 님</div>
-              <div class="sub" style="font-size:14px">${esc(a !== '' ? a + '세' : '나이 미입력')} ${esc(c.gender || '')}성 · ${esc(c.tag)} · 가입 ${(c.policies || []).length}건</div>
+              <div class="meta">${esc(a !== '' ? a + '세' : '나이 미입력')} ${esc(c.gender || '')}성 · 가입 ${(c.policies || []).length}건${bd && bd.days <= 30 ? ` <span class="dd pink">${I.gift}생일 ${bd.days ? 'D-' + bd.days : '오늘'}</span>` : ''}</div>
+              <div class="seg" role="group" aria-label="진행 상태">${TAGS.map((t) => `<button data-a="settag" data-v="${t}" aria-pressed="${c.tag === t}">${t}</button>`).join('')}</div>
               ${(c.interests || []).length ? `<div class="chips">${c.interests.map((t) => `<span class="ichip">${esc(t)}</span>`).join('')}</div>` : ''}
             </div>
             <div class="acts">
+              ${canCall(c) ? `<a class="btn call" href="tel:${telOf(c.phone)}" aria-label="전화 걸기">${I.phone}<span class="lbltxt">전화</span></a><a class="iconbtn" href="sms:${telOf(c.phone)}" aria-label="문자 보내기">${I.msg}</a>` : ''}
               <button class="btn" data-a="edit" aria-label="수정">${I.edit}<span class="lbltxt">수정</span></button>
               <button class="iconbtn" data-a="askdel" aria-label="고객 삭제" style="color:var(--pink-ink)">${I.trash}</button>
               <button class="btn pink" data-a="go" data-v="coverage" aria-label="보장분석">${I.shield}<span class="lbltxt">보장분석</span></button>
@@ -606,7 +725,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
           <dl class="info" style="margin-bottom:0">${info}</dl>
         </div>
         <div class="two">
-          <div class="card"><h2>가입 보험</h2><div class="list">${pols}
+          <div class="card"><div class="row-head"><h2>가입 보험 ${prem ? `<span class="sub" style="font-weight:600;font-size:13px">월 ${wonTxt(prem)}</span>` : ''}</h2><button class="btn sm" data-a="addpol">+ 보험</button></div><div class="list">${pols}
             ${none.length ? `<div class="pol" style="background:var(--pink-soft);color:var(--pink-ink)"><div class="k"><b>${esc(none.join(', '))} 없음</b><span style="color:inherit">보장분석에서 확인 필요</span></div></div>` : ''}</div></div>
           <div class="card"><div class="row-head"><h2>상담 기록</h2><button class="btn sm" data-a="memo">+ 메모</button></div><div class="list">${memos}</div></div>
         </div>
@@ -630,7 +749,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
     return `
       <div class="page-head">
         <button class="iconbtn" data-a="go" data-v="customers" aria-label="고객 관리로 돌아가기">${I.back}</button>
-        <div style="flex:1;min-width:160px"><h1 style="flex:none">${esc(c.name)} 님 보장분석</h1><div class="sub">증권 ${(c.policies || []).length}건 기준 <span class="example">예시 숫자</span></div></div>
+        <div style="flex:1;min-width:160px"><h1 style="flex:none">${esc(c.name)} 님 보장분석</h1><div class="sub">증권 ${(c.policies || []).length}건 기준 ${!c.covEdited && SEED_IDS.includes(c.id) ? '<span class="example">예시 숫자</span>' : ''}</div></div>
         <button class="btn ${S.present ? 'primary' : ''}" data-a="present" aria-pressed="${!!S.present}">${I.screen}${S.present ? '설계사 화면으로' : '고객에게 보여주기'}</button>
       </div>
       <div class="tiles">
@@ -641,7 +760,7 @@ button.up1 { flex: 1; height: 44px; border-radius: 12px; font-size: 14px; font-w
       <div class="covgrid ${S.present ? 'present' : ''}">
         <section class="card covtable" aria-label="보장 항목">
           <div class="cv h"><div>보장 항목</div><div>채움 정도</div><div style="text-align:right">현재</div><div style="text-align:right">목표</div><div style="text-align:center">상태</div></div>
-          ${rows.map((r) => `<div class="cv"><div style="font-weight:700">${esc(r.item)}</div><div class="bar"><b style="width:${r.s === 'none' ? 0 : Math.max(r.pct, 4)}%;background:${barColor[r.s]}"></b></div><div class="num" style="text-align:right;font-weight:700">${r.curTxt}</div><div class="num sub" style="text-align:right;font-size:14px">${r.goalTxt}</div><div class="st ${r.s}">${r.stTxt}</div></div>`).join('')}
+          ${rows.map((r, i) => `<button class="cv cvb" data-a="editcov" data-v="${i}" aria-label="${esc(r.item)} 금액 고치기"><div style="font-weight:700">${esc(r.item)}</div><div class="bar"><b style="width:${r.s === 'none' ? 0 : Math.max(r.pct, 4)}%;background:${barColor[r.s]}"></b></div><div class="num" style="text-align:right;font-weight:700">${r.curTxt}</div><div class="num sub" style="text-align:right;font-size:14px">${r.goalTxt}</div><div class="st ${r.s}">${r.stTxt}</div></button>`).join('')}<p class="sub" style="font-size:12.5px;margin:10px 0 0">항목을 누르면 금액을 고칠 수 있어요 (단위: 만원)</p>
         </section>
         ${S.present ? '' : `<div class="aside">
           <section class="card" aria-label="제안 메모">
@@ -816,12 +935,109 @@ ${memos || '- 없음'}
     document.open(); document.write(u.t); document.close();
   }
 
+  // ---------- 오늘 홈 ----------
+  function homeView() {
+    const hr = new Date().getHours();
+    const hello = hr < 11 ? '좋은 아침이에요' : hr < 18 ? '오늘도 힘내요' : '오늘 하루 수고했어요';
+    const cnt = (t) => S.customers.filter((c) => c.tag === t).length;
+    const kpis = [['전체 고객', '전체', S.customers.length, 'ink'], ['가망', '가망', cnt('가망'), 'pink'], ['상담 예정', '상담 예정', cnt('상담 예정'), 'lav'], ['계약', '계약', cnt('계약'), 'mint']];
+    const call = (c) => (canCall(c) ? `<a class="iconbtn sm" href="tel:${telOf(c.phone)}" aria-label="${esc(c.name)} 님에게 전화">${I.phone}</a>` : '');
+    const row = (c, main, sub, badge, cls, extra = '') => `<div class="hrow"><button class="hmain" data-a="pick-open" data-v="${c.id}"><span class="avatar sm">${esc(c.name[0])}</span><span class="who"><b>${esc(main)}</b><span>${esc(sub)}</span></span></button>${badge ? `<span class="dd ${cls}">${badge}</span>` : ''}${extra}${call(c)}</div>`;
+    const empty = (t) => `<p class="hempty">${t}</p>`;
+    // 약속
+    const appts = []; S.customers.forEach((c) => (c.memos || []).forEach((m) => { if (m.next) { const n = dayDiff(m.date); if (n <= 7 && n >= -14) appts.push({ c, m, n }); } }));
+    appts.sort((x, y) => (x.m.date < y.m.date ? -1 : 1));
+    const apHtml = appts.map(({ c, m, n }) => row(c, c.name + ' 님', m.text, n < 0 ? ddTxt(n) : n === 0 ? '오늘' : n === 1 ? '내일' : fmt(m.date).replace(/ \(.\)/, '') , n < 0 ? 'pink' : n <= 1 ? 'lav strong' : 'soft', `<button class="iconbtn sm" data-a="apptdone" data-v="${c.id}|${m.id}" aria-label="완료로 표시">${I.check}</button>`)).join('') || empty('일주일 안에 잡힌 약속이 없어요. 고객 상담 기록에서 "예정"으로 메모하면 여기에 떠요.');
+    // 연락해 볼 사람
+    const soon = new Set(appts.filter((x) => x.n >= 0).map((x) => x.c.id));
+    const follow = S.customers.filter((c) => c.tag !== '계약' && !soon.has(c.id)).map((c) => { const lc = lastContact(c); return { c, d: lc ? -dayDiff(lc) : null }; })
+      .filter((x) => x.d === null || x.d >= 14).sort((x, y) => (y.d ?? 9999) - (x.d ?? 9999)).slice(0, 6);
+    const flHtml = follow.map(({ c, d }) => row(c, c.name + ' 님', `${c.tag} · ${(c.interests || []).join('·') || '관심 보장 미입력'}`, d === null ? '연락 기록 없음' : d + '일째 연락 없음', d === null || d >= 30 ? 'butter' : 'soft')).join('') || empty('오래 연락 못 한 고객이 없어요. 잘하고 있어요!');
+    // 생일 · 갱신
+    const ev = [];
+    S.customers.forEach((c) => { const b = nextBday(c); if (b && b.days <= 30) ev.push({ c, n: b.days, main: c.name + ' 님 생일', sub: `${fmt(b.date)} · ${b.age}세`, cls: 'pink' }); });
+    S.customers.forEach((c) => (c.policies || []).forEach((p) => { if (p.renew) { const n = dayDiff(p.renew); if (n <= 60 && n >= -30) ev.push({ c, n, main: c.name + ' 님 ' + p.kind, sub: `갱신·만기 ${fmt(p.renew)}${p.premium ? ' · 월 ' + wonTxt(p.premium) : ''}`, cls: n < 0 ? 'pink' : 'butter' }); } }));
+    ev.sort((x, y) => x.n - y.n);
+    const evHtml = ev.map((e) => row(e.c, e.main, e.sub, e.n < 0 ? ddTxt(e.n) : e.n === 0 ? '오늘' : 'D-' + e.n, e.cls)).join('') || empty('한 달 안에 생일이나 갱신이 없어요. 생년월일과 보험 갱신일을 넣으면 여기서 알려줘요.');
+    // 실적
+    const ym = iso(today).slice(0, 7);
+    const months = []; for (let k = 5; k >= 0; k--) { const d = new Date(today.getFullYear(), today.getMonth() - k, 1); months.push(iso(d).slice(0, 7)); }
+    const consult = (key) => S.customers.reduce((t, c) => t + (c.memos || []).filter((m) => !m.next && (m.date || '').startsWith(key)).length, 0);
+    const contract = (key) => S.customers.filter((c) => (c.contractAt || '').startsWith(key)).length;
+    const newbie = (key) => S.customers.filter((c) => (createdOf(c) || '').startsWith(key)).length;
+    const series = months.map((k) => ({ k, a: consult(k), b: contract(k) }));
+    const mx = Math.max(1, ...series.map((x) => Math.max(x.a, x.b)));
+    const chart = `<div class="mchart" role="img" aria-label="최근 6개월 상담과 계약">${series.map((x) => `<div class="mcol ${x.k === ym ? 'cur' : ''}"><div class="bars"><i class="b1" style="height:${(x.a / mx) * 100}%"><em>${x.a || ''}</em></i><i class="b2" style="height:${(x.b / mx) * 100}%"><em>${x.b || ''}</em></i></div><span>${+x.k.slice(5)}월</span></div>`).join('')}</div>
+      <div class="legend"><span><i class="b1"></i>상담</span><span><i class="b2"></i>계약</span></div>`;
+    const tot = Math.max(1, S.customers.length);
+    const funnel = TAGS.map((t) => { const n = cnt(t); return `<div class="frow2"><span>${t}</span><div class="fbar"><b class="${t === '계약' ? 'mint' : t === '가망' ? 'pink' : 'lav'}" style="width:${Math.max(n ? 6 : 0, (n / tot) * 100)}%"></b></div><em class="num">${n}명</em></div>`; }).join('');
+    const rate = S.customers.length ? Math.round((cnt('계약') / S.customers.length) * 100) : 0;
+    return `
+      <div class="page-head home-head">
+        <div style="flex:1;min-width:0"><div class="hdate">${fmt(iso(today))}</div><h1>${hello}</h1></div>
+        <button class="btn primary" data-a="add">${I.plus}새 고객</button>
+      </div>
+      <div class="kpis">${kpis.map((k) => `<button class="kpi ${k[3]}" data-a="kfilter" data-v="${k[1]}"><span>${k[0]}</span><b class="num">${k[2]}<small>명</small></b></button>`).join('')}</div>
+      <div class="hgrid">
+        <section class="card hcard"><div class="hh"><span class="hi lav">${I.cal}</span><h2>약속</h2><span class="sub">지난 2주 · 앞으로 7일</span></div>${apHtml}</section>
+        <section class="card hcard"><div class="hh"><span class="hi butter">${I.phone}</span><h2>연락해 볼 사람</h2><span class="sub">2주 넘게 연락 없음</span></div>${flHtml}</section>
+        <section class="card hcard"><div class="hh"><span class="hi pink">${I.gift}</span><h2>생일 · 갱신</h2><span class="sub">생일 30일 · 갱신 60일 이내</span></div>${evHtml}</section>
+        <section class="card hcard"><div class="hh"><span class="hi mint">${I.chart}</span><h2>이번 달 실적</h2><span class="sub">${+ym.slice(5)}월</span></div>
+          <div class="mstats"><div><span>새 고객</span><b class="num">${newbie(ym)}</b></div><div><span>상담</span><b class="num">${consult(ym)}</b></div><div><span>계약</span><b class="num">${contract(ym)}</b></div><div><span>계약 비율</span><b class="num">${rate}<small>%</small></b></div></div>
+          <div class="sgrid"><div><h3>진행 단계</h3>${funnel}</div><div><h3>최근 6개월</h3>${chart}</div></div>
+        </section>
+      </div>`;
+  }
+
+  // ---------- 가입 보험 · 보장 금액 ----------
+  const PKINDS = ['종신', '실손', '암', '건강', '운전자', '자동차', '연금', '어린이', '치매·간병', '기타'];
+  function parseDateAny(t) {
+    const d = String(t || '').replace(/\D/g, ''); if (!d) return '';
+    let y, m, dd;
+    if (d.length === 8) { y = +d.slice(0, 4); m = +d.slice(4, 6); dd = +d.slice(6, 8); } else if (d.length === 6) { y = 2000 + +d.slice(0, 2); m = +d.slice(2, 4); dd = +d.slice(4, 6); } else return null;
+    const dt = new Date(y, m - 1, dd);
+    if (y < 1950 || y > 2100 || dt.getMonth() !== m - 1 || dt.getDate() !== dd) return null;
+    return iso(dt);
+  }
+  function dateHint(t) { const r = parseDateAny(t); if (r === '') return ''; if (r === null) return String(t).replace(/\D/g, '').length >= 6 ? '<span class="bad">날짜를 확인해 주세요</span>' : ''; const n = dayDiff(r); return n >= 0 ? 'D-' + n : -n + '일 지남'; }
+  function polModal() {
+    const f = S.pform;
+    return `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="p-title" style="width:620px">
+      <h2 id="p-title">${f.id ? '가입 보험 수정' : '가입 보험 추가'}</h2>
+      <p class="sub" style="margin:-8px 0 0">증권을 보고 아는 것만 적어도 돼요.</p>
+      <div class="lbl">종류<div class="chips" style="margin:0">${PKINDS.map((k) => `<button type="button" class="chip" data-a="pkind" data-v="${k}" aria-pressed="${!!f.kind && f.kind.startsWith(k)}">${k}</button>`).join('')}</div></div>
+      ${f.err ? '<div role="alert" style="color:var(--pink-ink);font-weight:600;margin-top:-6px">종류를 골라 주세요</div>' : ''}
+      <div class="frow"><label class="lbl">보험사<input class="field" id="p-co" value="${esc(f.company || '')}" placeholder="예: ○○생명"></label>
+        <label class="lbl">가입 연도<input class="field" id="p-year" inputmode="numeric" maxlength="4" value="${esc(f.year || '')}" placeholder="예: 2021"></label></div>
+      <div class="frow"><label class="lbl">월 보험료 (원)<input class="field" id="p-prem" inputmode="numeric" value="${f.premium ? Number(f.premium).toLocaleString() : ''}" placeholder="예: 52,000"></label>
+        <label class="lbl"><span>갱신·만기일 <span class="bhint" id="p-renew-hint">${dateHint(f.renewTxt ?? fmtBirth(f.renew))}</span></span><input class="field ${f.renewErr ? 'err' : ''}" id="p-renew" inputmode="numeric" maxlength="10" autocomplete="off" value="${esc(f.renewTxt ?? fmtBirth(f.renew))}" placeholder="예: 20270315"></label></div>
+      <label class="lbl">메모<input class="field" id="p-note" value="${esc(f.note || '')}" placeholder="예: 20년 납, 3년 갱신형"></label>
+      <div class="mfoot">${f.id ? '<button class="btn pink" data-a="delpol" style="margin-right:auto">삭제</button>' : ''}<button class="btn" data-a="close">취소</button><button class="btn primary" data-a="savepol">저장</button></div>
+    </div></div>`;
+  }
+  function readPform() {
+    const f = S.pform; if (!f) return;
+    const g = (id) => document.getElementById(id)?.value ?? '';
+    f.company = g('p-co').trim(); f.year = g('p-year').replace(/\D/g, ''); f.premium = Number(g('p-prem').replace(/\D/g, '')) || 0; f.note = g('p-note').trim();
+    f.renewTxt = g('p-renew'); const r = parseDateAny(f.renewTxt); f.renewErr = r === null; if (r !== null) f.renew = r;
+  }
+  function covModal() {
+    const c = sel(); const r = c.coverage[S.covIdx];
+    return `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="cv-title" style="width:440px">
+      <h2 id="cv-title">${esc(r.item)}</h2>
+      ${r.flag ? `<div class="lbl">가입 여부<div class="chips" style="margin:0"><button class="chip" data-a="covflag" data-v="1" aria-pressed="${!!r.cur}">가입</button><button class="chip" data-a="covflag" data-v="0" aria-pressed="${!r.cur}">없음</button></div></div>`
+        : `<div class="frow"><label class="lbl">지금 보장 (만원)<input class="field" id="cv-cur" inputmode="numeric" value="${r.cur || ''}" placeholder="0"></label><label class="lbl">목표 (만원)<input class="field" id="cv-goal" inputmode="numeric" value="${r.goal || ''}" placeholder="예: 5000"></label></div>
+        <p class="sub" style="margin:0;font-size:13px">1억은 10000, 5천만원은 5000으로 적어요.</p>`}
+      <div class="mfoot"><button class="btn" data-a="close">취소</button><button class="btn primary" data-a="savecov">저장</button></div>
+    </div></div>`;
+  }
+
   function renderLayer() {
     let h = '';
     if (S.modal === 'form') h += formModal();
     if (S.modal === 'memo') h += memoModal();
     if (S.modal === 'del') h += delModal();
-    if (S.modal === 'deldoc') { const d = (sel()?.docs || []).find((x) => x.id === S.delDoc); if (d) h += `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dd-title" style="width:420px"><h2 id="dd-title">${esc(d.name)}을(를) 지울까요?</h2><p class="sub" style="font-size:15px;margin:0">이 기기에 저장된 사진·파일이 지워지고 되돌릴 수 없어요.</p><div class="mfoot"><button class="btn" data-a="close">취소</button><button class="btn pink" data-a="dodeldoc">지우기</button></div></div></div>`; }
+    if (S.modal === 'deldoc') { const d = (sel()?.docs || []).find((x) => x.id === S.delDoc); if (d) h += `<div class="scrim"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dd-title" style="width:420px"><h2 id="dd-title">${esc(eul(d.name))} 지울까요?</h2><p class="sub" style="font-size:15px;margin:0">이 기기에 저장된 사진·파일이 지워지고 되돌릴 수 없어요.</p><div class="mfoot"><button class="btn" data-a="close">취소</button><button class="btn pink" data-a="dodeldoc">지우기</button></div></div></div>`; }
     if (S.viewDoc) h += viewerView();
     if (S.modal === 'changelog') {
       const fmtD = (d) => d.replace(/-/g, '.');
@@ -836,6 +1052,8 @@ ${memos || '- 없음'}
       </div></div>`;
     }
     if (S.modal === 'askc') h += askModal();
+    if (S.modal === 'policy') h += polModal();
+    if (S.modal === 'cov') h += covModal();
     if (S.cam) h += camView();
     if (S.drawer) h += drawerView();
     if (S.toast) h += `<div class="toast" role="status">${esc(S.toast)}</div>`;
@@ -1236,7 +1454,7 @@ JSON 배열로만 답해. 예: [{"q":"문제","opts":["보기1","보기2","보�
   // ---------- tablet app (APK) bridge ----------
   const AUTH_MSG = { 11: '지문이 등록돼 있지 않아요. 탭 설정에서 지문이나 화면 잠금을 먼저 설정해 주세요.', 14: '탭에 화면 잠금이 없어요. 설정에서 PIN이나 패턴을 먼저 만들어 주세요.', 12: '이 탭은 지문 센서가 없어요. 탭 설정에서 화면 잠금(PIN)을 만들어 주세요.', 7: '너무 많이 틀렸어요. 잠시 후 다시 해 주세요.', 9: '너무 많이 틀렸어요. 탭 잠금을 풀고 다시 해 주세요.', 10: '취소했어요. 지문 그림을 눌러 다시 시도해 주세요.', 13: '취소했어요. 지문 그림을 눌러 다시 시도해 주세요.', '-1': '취소했어요. 지문 그림을 눌러 다시 시도해 주세요.' };
   window.onAuthResult = (ok, code) => {
-    if (ok) { S.authMsg = ''; S.fpOk = true; render(); setTimeout(() => { S.fpOk = false; S.view = 'customers'; render(); }, 600); }
+    if (ok) { S.authMsg = ''; S.fpOk = true; render(); setTimeout(() => { S.fpOk = false; S.view = 'home'; render(); }, 600); }
     else { S.authMsg = AUTH_MSG[code] || '확인하지 못했어요. 지문 그림을 눌러 다시 시도해 주세요.'; render(); }
   };
   function shareText(t) { try { window.Android.shareText(t); } catch (e) { toast('공유 창을 열지 못했어요'); } }
@@ -1265,7 +1483,8 @@ ${memos || '- 없음'}
     if (S.drawer) { S.drawer = false; render(); return 'handled'; }
     if (S.quiz) { clearInterval(speedT); S.quiz = null; render(); return 'handled'; }
     if (S.result) { S.result = null; render(); return 'handled'; }
-    if (S.view === 'coverage' || S.view === 'study') { S.view = 'customers'; S.present = false; render(); return 'handled'; }
+    if (S.view === 'coverage') { S.view = 'customers'; S.present = false; render(); return 'handled'; }
+    if (S.view === 'study' || S.view === 'customers') { S.view = 'home'; render(); return 'handled'; }
     if (Date.now() - (S.backAt || 0) < 2000) return 'exit';
     S.backAt = Date.now(); toast('뒤로 버튼을 한 번 더 누르면 종료돼요'); return 'handled';
   };
@@ -1297,11 +1516,33 @@ ${memos || '- 없음'}
     const b = ev.target.closest('[data-a]'); if (!b) return;
     const a = b.dataset.a, v = b.dataset.v;
     if (a === 'fp' && IS_APP) { S.authMsg = ''; render(); try { window.Android.authenticate(); } catch (e) {} return; }
-    if (a === 'fp') { if (S.fpOk) return; S.fpOk = true; render(); setTimeout(() => { S.fpOk = false; S.view = 'customers'; render(); }, 800); }
-    else if (a === 'enter') { S.view = 'customers'; render(); }
+    if (a === 'fp') { if (S.fpOk) return; S.fpOk = true; render(); setTimeout(() => { S.fpOk = false; S.view = 'home'; render(); }, 800); }
+    else if (a === 'enter') { S.view = 'home'; render(); }
     else if (a === 'logout') { clearInterval(speedT); S.quiz = null; S.result = null; S.view = 'login'; S.drawer = false; render(); }
     else if (a === 'go') { if (S.quiz && v !== 'study') { clearInterval(speedT); S.quiz = null; } if (v !== 'coverage') S.present = false; S.view = v; render(); document.getElementById('main')?.scrollTo(0, 0); }
     else if (a === 'filter') { S.filter = v; render(); }
+    else if (a === 'kfilter') { S.filter = v; S.q = ''; S.view = 'customers'; render(); }
+    else if (a === 'settag') { const c = sel(); if (!c || c.tag === v) return; c.tag = v; if (v === '계약' && !c.contractAt) c.contractAt = iso(today); save(); render(); toast(c.name + ' 님을 ' + ro(v) + ' 바꿨어요'); }
+    else if (a === 'apptdone') { const [cid, mid] = v.split('|'); const c = S.customers.find((x) => x.id === cid); const m = c && (c.memos || []).find((x) => x.id === mid); if (m) { m.next = false; save(); render(); toast('완료로 표시했어요'); } }
+    else if (a === 'addpol') { S.pform = { id: null, kind: '', company: '', year: '', premium: 0, renew: '', note: '' }; S.modal = 'policy'; renderLayer(); }
+    else if (a === 'editpol') { const p = (sel()?.policies || []).find((x) => x.id === v); if (!p) return; S.pform = { ...p }; S.modal = 'policy'; renderLayer(); }
+    else if (a === 'pkind') { readPform(); S.pform.kind = v === '기타' ? '기타 보험' : v + '보험'; S.pform.err = false; renderLayer(); }
+    else if (a === 'savepol') {
+      readPform(); const f = S.pform;
+      if (!f.kind) { f.err = true; renderLayer(); return; }
+      if (f.renewErr) { renderLayer(); toast('갱신·만기일을 확인해 주세요 (예: 20270315)'); return; }
+      const c = sel(); const data = { kind: f.kind, company: f.company, year: f.year ? +f.year : '', premium: f.premium, renew: f.renew || '', note: f.note };
+      if (f.id) Object.assign(c.policies.find((x) => x.id === f.id), data); else c.policies = [...(c.policies || []), { id: 'p' + uid(), ...data }];
+      save(); S.modal = null; S.pform = null; render(); toast(eul(f.kind) + (f.id ? ' 고쳤어요' : ' 추가했어요'));
+    }
+    else if (a === 'delpol') { const c = sel(); const f = S.pform; c.policies = c.policies.filter((x) => x.id !== f.id); save(); S.modal = null; S.pform = null; render(); toast(eul(f.kind) + ' 지웠어요'); }
+    else if (a === 'editcov') { S.covIdx = +v; S.modal = 'cov'; renderLayer(); }
+    else if (a === 'covflag') { const r = sel().coverage[S.covIdx]; r.cur = +v; renderLayer(); }
+    else if (a === 'savecov') {
+      const c = sel(); const r = c.coverage[S.covIdx];
+      if (!r.flag) { r.cur = Number((document.getElementById('cv-cur')?.value || '').replace(/\D/g, '')) || 0; const g = Number((document.getElementById('cv-goal')?.value || '').replace(/\D/g, '')); if (g) r.goal = g; }
+      c.covEdited = true; save(); S.modal = null; render(); toast(r.item + ' 금액을 저장했어요');
+    }
     else if (a === 'pick' || a === 'pick-open') { S.selId = v; if (a === 'pick-open') S.view = 'customers'; render(); }
     else if (a === 'add') { S.form = blankForm(); S.modal = 'form'; renderLayer(); document.getElementById('f-name')?.focus(); }
     else if (a === 'edit') { const c = sel(); S.form = { ...blankForm(), ...JSON.parse(JSON.stringify(c)), err: false }; S.modal = 'form'; renderLayer(); }
@@ -1311,8 +1552,8 @@ ${memos || '- 없음'}
       if (!f.name.trim()) { f.err = true; renderLayer(); return; }
       if (f.birthErr) { renderLayer(); toast('생년월일을 확인해 주세요 (예: 900515)'); return; }
       const fields = { name: f.name.trim(), gender: f.gender, birth: f.birth, phone: f.phone.trim(), job: f.job.trim(), area: f.area.trim(), source: f.source, tag: f.tag, interests: f.interests };
-      if (f.id) { const c = S.customers.find((x) => x.id === f.id); Object.assign(c, fields); if (f.birth) delete c.age; toast(c.name + ' 님 정보를 저장했어요'); }
-      else { const c = { id: 'c' + uid(), ...fields, policies: [], memos: [], coverage: cov(0, 0, 0, 0, false, 0, 0), proposal: '' }; S.customers.unshift(c); S.selId = c.id; S.filter = '전체'; S.q = ''; toast(c.name + ' 님을 등록했어요'); }
+      if (f.id) { const c = S.customers.find((x) => x.id === f.id); Object.assign(c, fields); if (c.tag === '계약' && !c.contractAt) c.contractAt = iso(today); if (f.birth) delete c.age; toast(c.name + ' 님 정보를 저장했어요'); }
+      else { const c = { id: 'c' + uid(), createdAt: iso(today), ...(fields.tag === '계약' ? { contractAt: iso(today) } : {}), ...fields, policies: [], memos: [], coverage: cov(0, 0, 0, 0, false, 0, 0), proposal: '' }; S.customers.unshift(c); S.selId = c.id; S.filter = '전체'; S.q = ''; toast(c.name + ' 님을 등록했어요'); }
       save(); S.modal = null; render();
     }
     else if (a === 'close') { S.modal = null; renderLayer(); }
@@ -1379,7 +1620,7 @@ ${memos || '- 없음'}
     else if (a === 'askdeldoc') { S.delDoc = v; S.modal = 'deldoc'; renderLayer(); }
     else if (a === 'dodeldoc') {
       const c = sel(); const d = (c.docs || []).find((x) => x.id === S.delDoc);
-      if (d) { (d.type === 'bundle' ? d.pages : [d.blob]).forEach((id) => delBlob(id)); c.docs = c.docs.filter((x) => x.id !== d.id); save(); toast(d.name + '을(를) 지웠어요'); }
+      if (d) { (d.type === 'bundle' ? d.pages : [d.blob]).forEach((id) => delBlob(id)); c.docs = c.docs.filter((x) => x.id !== d.id); save(); toast(eul(d.name) + ' 지웠어요'); }
       S.modal = null; render();
     }
     else if (a === 'quiz') { if (b.disabled) return; startQuiz(v, b.dataset.s); }
@@ -1409,6 +1650,14 @@ ${memos || '- 없음'}
   });
   document.addEventListener('change', (ev) => { if (ev.target.id === 'exam') { S.st.exam = ev.target.value; saveSt(); render(); } });
   document.addEventListener('input', (ev) => {
+    if (ev.target.id === 'f-phone') { const el = ev.target; const d = el.value.replace(/\D/g, '').slice(0, 11); const out = d.length >= 9 ? fmtPhone(d) : d; if (out !== el.value) el.value = out; return; }
+    if (ev.target.id === 'p-prem') { const el = ev.target; const d = el.value.replace(/\D/g, '').slice(0, 9); const out = d ? Number(d).toLocaleString() : ''; if (out !== el.value) el.value = out; return; }
+    if (ev.target.id === 'p-renew') {
+      const el = ev.target; const d = el.value.replace(/\D/g, '').slice(0, 8);
+      let out = d; if (d.length === 8) out = d.slice(0, 4) + '.' + d.slice(4, 6) + '.' + d.slice(6);
+      if (out !== el.value) el.value = out;
+      const h = document.getElementById('p-renew-hint'); if (h) h.innerHTML = dateHint(out); return;
+    }
     if (ev.target.id === 'ask-extra' && S.ask) { S.ask.extra = ev.target.value; const pre = document.querySelector('.askprev pre'); if (pre) pre.textContent = askPrompt(); return; }
     if (ev.target.id === 'f-birth') {
       const el = ev.target; const d = el.value.replace(/\D/g, '').slice(0, 8);
